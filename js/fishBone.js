@@ -123,12 +123,17 @@ $.fn.fishBone = function(data) {
             var titleRightY = getTitleRightY(index);
 
             var ul = $("<ul class='text-left'></ul>");
-           
+
             //封装其他属性
             $.each(this, function(name, value) {
                 if (name != 'title') {
-                    var li = $("<li>" + name + "：" + value + "</li>").css("border-left", "1px solid " + color);
-                    li.appendTo(ul);
+                    if (name == '') {
+                        var li = $("<li>&nbsp;</li>").css("border-left", "1px solid " + color);
+                        li.appendTo(ul);
+                    } else {
+                        var li = $("<li>" + name + "：" + value + "</li>").css("border-left", "1px solid " + color);
+                        li.appendTo(ul);
+                    }
                 } else {
                     var link = $("<a class='btn btn-large btn-link' href='" + value.link + "'>" + value.name + "</a>")
                     var li = $("<li></li>").css("border-left", "1px solid " + color);
@@ -136,7 +141,7 @@ $.fn.fishBone = function(data) {
                     li.appendTo(ul);
                 }
             });
-      
+
             //封装轴线上的圆点
             var linePointY = getLinePointY(index);
             var point = $("<li class='line-last line-point'></li>").css('background-position', '0px ' + linePointY);
